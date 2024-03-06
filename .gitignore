@@ -1,9 +1,7 @@
 # Generated files
 obj/
 bin/
-gen/
-out/
-release/
+
 
 # Gradle files
 .gradle/
