@@ -66,3 +66,11 @@ void displayMainMenu()
     Console.WriteLine(" [Q] Quit Program");  
 }
 
+void displayAnalysisMenu()
+{
+    Console.WriteLine(" [A] Average Sales");
+    Console.WriteLine(" [H] Highest Sales");
+    Console.WriteLine(" [L] Lowest Sales");
+    Console.WriteLine(" [G] Graph Sales");
+    Console.WriteLine(" [R] Return to MAIN MENU");
+}
