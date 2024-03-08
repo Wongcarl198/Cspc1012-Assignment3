@@ -90,3 +90,18 @@ int highestSales(double[] sales, int countOfEntries)
     
     return index;
 }
+
+
+// Finds the lowest value in the sales array then return the index of the value in the array
+int lowestSales(double[] sales, int countOfEntries)
+{   
+    int index = 0;
+    double min = sales[0];
+    for (int i = 0; i < countOfEntries; i++)
+    {
+        if (sales[i] < min)
+            index = i;
+    }
+    
+    return index;
+}
