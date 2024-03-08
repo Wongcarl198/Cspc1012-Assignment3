@@ -77,6 +77,7 @@ void displayAnalysisMenu()
 }
 
 
+// Finds the highest values in the sales array then return the index of the value in the array
 int highestSales(double[] sales, int countOfEntries)
 {   
     int index = 0;
