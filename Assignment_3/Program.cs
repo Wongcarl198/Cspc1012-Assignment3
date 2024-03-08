@@ -54,6 +54,7 @@ void DisplayProgramIntro()
 	Console.WriteLine();
 }
 
+
 void displayMainMenu()
 {
     Console.WriteLine(" [N] New Daily Sales Entry");
@@ -73,4 +74,18 @@ void displayAnalysisMenu()
     Console.WriteLine(" [L] Lowest Sales");
     Console.WriteLine(" [G] Graph Sales");
     Console.WriteLine(" [R] Return to MAIN MENU");
+}
+
+
+int highestSales(double[] sales, int countOfEntries)
+{   
+    int index = 0;
+    double max = sales[0];
+    for (int i = 0; i < countOfEntries; i++)
+    {
+        if (sales[i] > max)
+            index = i;
+    }
+    
+    return index;
 }
