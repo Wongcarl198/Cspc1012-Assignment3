@@ -9,7 +9,12 @@
 // </summary>
 //
 
+bool contin = true;
+int arraySize = 31;
 
+
+double[] sales = new double[arraySize];
+string[] dates = new string[arraySize];
 
 //Prompt method
 string Prompt(string promptString)
@@ -116,4 +121,36 @@ double meanAverageSales(double[] sales, int countOfEntries)
     
     return sum/countOfEntries;
 
+}
+
+
+
+// allow user to input new sales
+int enterSales(double[] sales, string[] dates)
+{   int day = 1;
+    string month = Prompt($"Enter the month (e.g. 03): ");
+    string year = Prompt($"Enter the year (yyyy): ");
+    double quit = -1.0;
+    int i = 0;
+    while (contin)
+    {   
+        string formatedDay = day.ToString("00");
+        dates[i] = $"{month}-{formatedDay}-{year}";
+        
+        sales[i] = PromptDouble($"Enter day {day} sales: ");
+        Console.WriteLine($"Hint: Enter -1 to cancel and exit.");
+        if (sales[i] == quit)
+        {
+            contin = false;
+        }
+        else
+        {
+            
+            i += 1;
+            day +=1;
+        }
+        
+    }
+
+    return i;
 }
