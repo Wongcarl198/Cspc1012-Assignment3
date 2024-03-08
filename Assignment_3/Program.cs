@@ -126,11 +126,11 @@ double meanAverageSales(double[] sales, int countOfEntries)
 
 
 // allow user to input new sales
-int enterSales(double[] sales, string[] dates)
+int enterSales(double[] sales, string[] dates)                      //ERROR: Sales are not in two decimal place
 {   int day = 1;
     string month = Prompt($"Enter the month (e.g. 03): ");
     string year = Prompt($"Enter the year (yyyy): ");
-    double quit = -1.0;
+    double quit = -1.0;                                             
     int i = 0;
     while (contin)
     {   
