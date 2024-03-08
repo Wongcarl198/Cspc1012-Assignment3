@@ -105,3 +105,15 @@ int lowestSales(double[] sales, int countOfEntries)
     
     return index;
 }
+
+
+// Calulates the Average sales of the month
+double meanAverageSales(double[] sales, int countOfEntries)
+{
+    double sum = 0;
+    for (int i = 0; i < countOfEntries; i++)
+        sum += sales[i];
+    
+    return sum/countOfEntries;
+
+}
