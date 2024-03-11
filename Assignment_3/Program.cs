@@ -10,11 +10,12 @@
 //
 
 bool contin = true;
-int arraySize = 31;
+int physicalSize = 31;
+int logicalSize = 0;
 
 
-double[] sales = new double[arraySize];
-string[] dates = new string[arraySize];
+double[] sales = new double[logicalSize];
+string[] dates = new string[logicalSize];
 
 //Prompt method
 string Prompt(string promptString)
