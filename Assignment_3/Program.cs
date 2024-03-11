@@ -158,7 +158,7 @@ int enterSales(double[] sales, string[] dates)                      //ERROR: Sal
     return logicalSize;
 }
 
-
+// Method to get the file name
 string GetFileName()
 {
 	string fileName = "";
@@ -167,4 +167,29 @@ string GetFileName()
 		fileName = Prompt("Enter file name including .csv or .txt: ");
 	} while (string.IsNullOrWhiteSpace(fileName));
 	return fileName;
+}
+
+
+// allow the user to load the file data
+int LoadFileValuesToMemory(string[] dates, double[] sales)
+{
+	string fileName = GetFileName();
+	int logicalSize = 0;
+	string filePath = $"./data/{fileName}";
+	if (!File.Exists(filePath))
+		throw new Exception($"The file {fileName} does not exist.");
+	string[] csvFileInput = File.ReadAllLines(filePath);
+	for(int i = 0; i < csvFileInput.Length; i++)
+	{
+		string[] items = csvFileInput[i].Split(',');
+		
+        if(i != 0)
+		{
+		dates[logicalSize] = items[0];
+        sales[logicalSize] = double.Parse(items[1]);
+        logicalSize++;
+		}
+	}
+  Console.WriteLine($"Load complete. {fileName} has {logicalSize} data entries");
+	return logicalSize;
 }
