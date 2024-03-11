@@ -153,7 +153,9 @@ int enterSales(double[] sales, string[] dates)                      //ERROR: Sal
         
     }
 
-    return i;
+    int logicalSize = i;
+
+    return logicalSize;
 }
 
 
