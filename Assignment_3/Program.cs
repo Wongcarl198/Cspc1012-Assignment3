@@ -22,7 +22,7 @@ string Prompt(string promptString)
   string response = "";
   Console.Write(promptString);
   response = Console.ReadLine();
-  return response.ToUpper();
+  return response;
 }
 
 //PromptDouble method 
