@@ -154,3 +154,14 @@ int enterSales(double[] sales, string[] dates)                      //ERROR: Sal
 
     return i;
 }
+
+
+string GetFileName()
+{
+	string fileName = "";
+	do
+	{
+		fileName = Prompt("Enter file name including .csv or .txt: ");
+	} while (string.IsNullOrWhiteSpace(fileName));
+	return fileName;
+}
