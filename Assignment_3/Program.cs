@@ -155,7 +155,7 @@ double FindHighestValueInMemory(double[] sales, int logicalSize)
         }
     
     }
-    
+    Console.WriteLine($"The Highest value is {max:n2}");
     return max;
 }
 
@@ -173,7 +173,7 @@ double FindLowestValueInMemory(double[] sales, int logicalSize)
             index = i;
         }
     }
-    
+    Console.WriteLine($"The lowest value is {min:n2}");
     return min;
 }
 
@@ -185,7 +185,9 @@ double FindAverageOfValuesInMemory(double[] sales, int logicalSize)
     for (int i = 0; i < logicalSize; i++)
         sum += sales[i];
     
-    return sum/logicalSize;
+    sum = sum/logicalSize;
+    Console.WriteLine($"The sales average is {sum:n2}");
+    return sum;
 
 }
 
