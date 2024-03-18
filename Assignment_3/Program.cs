@@ -274,8 +274,28 @@ int AddMemoryValues(string[] dates, double[] sales, int logicalSize)
 // Function to Edit the data in a file
 void EditMemoryValues(string[] dates, double[] sales, int logicalSize)
 {
-	Console.WriteLine("Not Implemented Yet");
-	//TODO: Replace this code with yours to implement this function.
+	double sale = 0.0;
+  string dateString = "";
+  int day = 0;
+
+  if (logicalSize == 0)
+  {
+    throw new Exception($"There are no entries loaded. Please load a file or add a value in memory first");
+  }
+  dateString = promptDate("Enter the day in format mm-dd-yyyy (eg. 11-23-2024): ");
+  bool found = false;
+  for (int i = 0; i < logicalSize; i++)
+  {
+    if (dates[i].Equals(dateString))
+    {
+      found = true;
+      day = i;
+    }
+  }
+  if (found == false)
+    throw new Exception($"{dateString} is not in memory. Add entry instead.");
+  sale = PromptDoubleBetweenMinMax($"Enter a double value", minValue, maxValue);
+  sales[day] = sale;
 }
 
 //Function to create the graph the data
