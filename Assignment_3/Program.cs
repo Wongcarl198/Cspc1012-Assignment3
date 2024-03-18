@@ -17,6 +17,9 @@ int logicalSize = 0;
 double[] sales = new double[physicalSize];
 string[] dates = new string[physicalSize];
 
+double minValue = 0.0;
+double maxValue = 100.0;
+
 // "Main Function"
 bool goAgain = true;
   while (goAgain)
@@ -251,9 +254,21 @@ string promptDate(string prompt)
 // Function to add data to a file
 int AddMemoryValues(string[] dates, double[] sales, int logicalSize)
 {
-	Console.WriteLine("Not Implemented Yet");
-	return 0;
-	//TODO: Replace this code with yours to implement this function.
+	double sale = 0.0;
+  string dateString = "";
+
+  dateString = promptDate("Enter date format mm--dd-yyyy (eg 11-23-2023): ");
+  bool found = false;
+  for (int i = 0; i < logicalSize; i++)
+    if (dates[i].Equals(dateString))
+      found = true;
+  if(found == true)
+    throw new Exception($"{dateString} is already in memory. Edit entry instead.");
+  sale = PromptDoubleBetweenMinMax($"Enter a double value", minValue, maxValue);
+  dates[logicalSize] = dateString;
+  sales[logicalSize] = sale;
+  logicalSize++;
+  return logicalSize;
 }
 
 // Function to Edit the data in a file
@@ -275,8 +290,22 @@ void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
 string Prompt(string promptString)
 {
   string response = "";
-  Console.Write(promptString);
-  response = Console.ReadLine();
+  while(true)
+  {
+    try
+    {
+      Console.Write(promptString);
+      response = Console.ReadLine().Trim();
+      if(string.IsNullOrWhiteSpace(response))
+        throw new Exception($"Empty input: Please enter something.");
+      break;
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine(ex.Message);
+    }
+    
+  }    
   return response;
 }
 
