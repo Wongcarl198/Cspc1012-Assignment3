@@ -194,6 +194,8 @@ double FindAverageOfValuesInMemory(double[] sales, int logicalSize)
 // Function to save the data into a file
 void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
 {
+
+  //testing on new device
 	Console.WriteLine("Not Implemented Yet");
 	//TODO: Replace this code with yours to implement this function.
 }
