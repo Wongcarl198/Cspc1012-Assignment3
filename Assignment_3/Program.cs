@@ -200,18 +200,18 @@ void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
 	//TODO: Replace this code with yours to implement this function.
 }
 
-
+// helper function for the AddMemoryValues
 double PromptDoubleBetweenMinMax(string Prompt, double min, double max)
 {
   bool inValidInput = true;
-  double num = 0:
+  double num = 0;
   while (inValidInput)
   {
     try
     {
-      Console.Write9($"{Prompt} between {min:n2} and {max:n2}: ");
+      Console.Write($"{Prompt} between {min:n2} and {max:n2}: ");
       num = double.Parse(Console.ReadLine());
-      if (num > max && num < min)
+      if (num > max || num < min)
         throw new Exception($"InValid. Must be between {min} and {max}.");
       inValidInput = false;
     }
@@ -224,8 +224,28 @@ double PromptDoubleBetweenMinMax(string Prompt, double min, double max)
 }
 
 
-
-
+// Helper function for the AddMemoryValues to get the date
+string promptDate(string prompt)
+{
+  bool inValidInput = true;
+  DateTime date = DateTime.Today;
+  Console.WriteLine(date);
+  while (inValidInput)
+  {
+    try
+    {
+      Console.Write(prompt);
+      date = DateTime.Parse(Console.ReadLine());
+      Console.WriteLine(date);
+      inValidInput = false;
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine($"{ex.Message}");
+    }
+  }
+  return date.ToString("MM-dd-yyyy");
+}
 
 
 // Function to add data to a file
