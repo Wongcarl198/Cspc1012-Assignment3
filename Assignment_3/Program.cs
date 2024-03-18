@@ -197,10 +197,20 @@ double FindAverageOfValuesInMemory(double[] sales, int logicalSize)
 // Function to save the data into a file
 void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
 {
+  string fileName = GetFileName();
+  string filePath = $"./data/{fileName}";
+  if (!File.Exists(filePath))
+    throw new Exception($"The file {fileName} does not exist.");
+  if (logicalSize == 0)
+    throw new Exception($"There are no entries to save. Please add entries!");
+  string[] csvLine = new string[physicalSize];
+  csvLine[0] = ($"Dates,Sales");
+  for (int i = 0; i < logicalSize; i++)
+  {
+    csvLine[i + 1] = $"{dates[i]},{sales[i].ToString()}";
+  }
+  File.WriteAllLines(filePath, csvLine);
 
-  //testing on new device
-	Console.WriteLine("Not Implemented Yet");
-	//TODO: Replace this code with yours to implement this function.
 }
 
 // helper function for the AddMemoryValues
