@@ -9,10 +9,10 @@
 // </summary>
 //
 
-bool contin = true;
+
 int physicalSize = 31;
 int logicalSize = 0;
-
+string fileName = "";
 
 double[] sales = new double[physicalSize];
 string[] dates = new string[physicalSize];
@@ -121,14 +121,15 @@ int LoadFileValuesToMemory(string[] dates, double[] sales)
 	{
 		string[] items = csvFileInput[i].Split(',');
 		
-        if(i != 0)
+    if(i != 0)
 		{
-            dates[logicalSize] = items[0];
-            sales[logicalSize] = double.Parse(items[1]);
-            logicalSize++;
+      dates[logicalSize] = items[0];
+      sales[logicalSize] = double.Parse(items[1]);
+      logicalSize++;
 		}
 	}
-  Console.WriteLine($"Load complete. {fileName} has {logicalSize} data entries");
+  Array.Sort(dates, sales, 0, logicalSize);
+  Console.WriteLine($"Load complete. {filePath} has {logicalSize} data entries");
 	return logicalSize;
 }
 
@@ -311,8 +312,50 @@ void EditMemoryValues(string[] dates, double[] sales, int logicalSize)
 //Function to create the graph the data
 void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
 {
-	Console.WriteLine("Not Implemented Yet");
-	//TODO: Replace this code with yours to implement this function.
+  Console.WriteLine($"=== Sales of the month of {fileName} ===");
+  Console.WriteLine($"Dollars");
+  
+
+  int dollars = 100;
+  string perLine = "";
+
+  while(dollars >= 0 ) {
+    Console.Write($"{dollars, 4}|");
+    string[] salesDay = dates[0].Split('-');
+
+    for(int i = 1; i <= physicalSize; i++) {
+      string formatDay = i.ToString("00");
+      int dayIndex = Array.IndexOf(dates, $"{salesDay[0]}-{formatDay}-{salesDay[2]}"); 
+
+      if(dayIndex != -1) {
+        if(sales[dayIndex] >= dollars && sales[dayIndex] <= (dollars + 9)) {
+          perLine += $"{sales[dayIndex], 3}";
+        } else {
+          perLine += $"{' ', 3}";
+        }
+      } else {
+        perLine += $"{' ', 3}";
+      }
+    }
+    Console.WriteLine($"{perLine}");
+    perLine = "";
+    dollars -= 10;
+  }
+
+  string line = "-----";
+  string days = "";
+
+  for(int i = 1; i <= physicalSize; i++) {
+    string formatDay = i.ToString("00");
+    line += "---";
+    days += $"{formatDay, 3}";
+  }
+
+  Console.WriteLine($"{line}");
+  Console.Write($"Date|");
+  Console.Write($"{days}");
+
+  Console.WriteLine($"\n");
 }
 
 
@@ -339,25 +382,3 @@ string Prompt(string promptString)
   return response;
 }
 
-
-//PromptDouble method 
-double PromptDouble(string promptString)
-{
-    bool inValidInput = true;
-    double input = 0;
-    while(inValidInput)
-    {
-        try
-        {
-
-            Console.Write(promptString);
-            input = double.Parse(Console.ReadLine());
-            inValidInput = false;
-        }
-        catch(Exception ex)
-        {
-            Console.WriteLine($"InValid Input: {ex.Message}");
-        }
-    }
-    return input;
-}
