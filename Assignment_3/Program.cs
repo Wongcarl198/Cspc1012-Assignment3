@@ -12,7 +12,7 @@
 
 int physicalSize = 31;
 int logicalSize = 0;
-string fileName = "";
+
 
 double[] sales = new double[physicalSize];
 string[] dates = new string[physicalSize];
@@ -309,54 +309,86 @@ void EditMemoryValues(string[] dates, double[] sales, int logicalSize)
   sales[day] = sale;
 }
 
+
 //Function to create the graph the data
 void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
 {
-  Console.WriteLine($"=== Sales of the month of {fileName} ===");
-  Console.WriteLine($"Dollars");
-  
-
   int dollars = 100;
-  string perLine = "";
+  string line = "";
+  string[] salesMonthYear = dates[0].Split("-");
+  string month = salesMonthYear[0];
+  string year = salesMonthYear[2];
+  Console.WriteLine($"---Sales of {month}-{year}--- ");
+  Console.WriteLine("Dollars");
 
-  while(dollars >= 0 ) {
+  // y-axis
+  for(int y = 1; y <= physicalSize; y++)
+  {
     Console.Write($"{dollars, 4}|");
-    string[] salesDay = dates[0].Split('-');
+    
+    //plotting the sales on the graph
+    for(int i = 1; i <= physicalSize; i++)
+    {
+      string day = i.ToString("00");
+      
+      // look if that date exists in the csv file and return the index,
+      // otherwise return -1
+      int daySaleIndex = Array.IndexOf(dates, $"{month}-{day}-{year}");
 
-    for(int i = 1; i <= physicalSize; i++) {
-      string formatDay = i.ToString("00");
-      int dayIndex = Array.IndexOf(dates, $"{salesDay[0]}-{formatDay}-{salesDay[2]}"); 
-
-      if(dayIndex != -1) {
-        if(sales[dayIndex] >= dollars && sales[dayIndex] <= (dollars + 9)) {
-          perLine += $"{sales[dayIndex], 3}";
-        } else {
-          perLine += $"{' ', 3}";
+      // if the return is not -1
+      if(daySaleIndex != -1)
+      {
+        //if the sale of that day is between e.g(90-80) 
+        //then insert the number into the line
+        if(sales[daySaleIndex] >= dollars && sales[daySaleIndex] <= (dollars + 9))
+        {
+          line += ($"{sales[daySaleIndex], 3}");
         }
-      } else {
-        perLine += $"{' ', 3}";
+
+        //if the sale of that day is not between the range, insert empty space
+        else
+        {
+          line += ($"{" ", 3}");
+        }
+      }
+
+      // if the return is -1
+      // add empty space
+      else
+      {
+        line += ($"{" ", 3}");
       }
     }
-    Console.WriteLine($"{perLine}");
-    perLine = "";
-    dollars -= 10;
+    Console.WriteLine($"{line}");
+
+    //reset the line for the next line
+    line = "";
+
+    dollars -=10;
+    //if the dollars is lower than 0, exit the loop
+    if (dollars < 0)
+    {  
+      break;
+    }
   }
 
-  string line = "-----";
+  // the x axis
+  string xAxis = "-----";
   string days = "";
 
-  for(int i = 1; i <= physicalSize; i++) {
-    string formatDay = i.ToString("00");
-    line += "---";
-    days += $"{formatDay, 3}";
+  for(int x = 1; x <= physicalSize; x++)
+  {
+    string day = x.ToString("00");
+    xAxis += "---";
+    days += ($"{day, 3}");
   }
 
-  Console.WriteLine($"{line}");
+  Console.WriteLine($"{xAxis}");
   Console.Write($"Date|");
   Console.Write($"{days}");
 
-  Console.WriteLine($"\n");
 }
+
 
 
 //Prompt method
