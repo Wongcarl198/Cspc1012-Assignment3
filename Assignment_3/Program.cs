@@ -10,7 +10,7 @@
 //
 
 
-int physicalSize = 31;
+int physicalSize = 32;
 int logicalSize = 0;
 
 
@@ -120,7 +120,6 @@ int LoadFileValuesToMemory(string[] dates, double[] sales)
 	for(int i = 0; i < csvFileInput.Length; i++)
 	{
 		string[] items = csvFileInput[i].Split(',');
-		
     if(i != 0)
 		{
       dates[logicalSize] = items[0];
@@ -208,6 +207,7 @@ void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
   csvLine[0] = ($"Dates,Sales");
   for (int i = 0; i < logicalSize; i++)
   {
+    
     csvLine[i + 1] = $"{dates[i]},{sales[i].ToString()}";
   }
   File.WriteAllLines(filePath, csvLine);
