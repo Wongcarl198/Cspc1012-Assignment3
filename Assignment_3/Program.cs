@@ -327,7 +327,7 @@ void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
     Console.Write($"{dollars, 4}|");
     
     //plotting the sales on the graph
-    for(int i = 1; i <= physicalSize; i++)
+    for(int i = 1; i < physicalSize; i++)
     {
       string day = i.ToString("00");
       
@@ -376,7 +376,7 @@ void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
   string xAxis = "-----";
   string days = "";
 
-  for(int x = 1; x <= physicalSize; x++)
+  for(int x = 1; x < physicalSize; x++)
   {
     string day = x.ToString("00");
     xAxis += "---";
