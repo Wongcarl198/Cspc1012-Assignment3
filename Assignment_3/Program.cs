@@ -329,7 +329,7 @@ void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
     Console.Write($"{dollars, 4}|");
     
     //plotting the sales on the graph
-    for(int i = 1; i < physicalSize; i++)
+    for(int i = 1; i <= physicalSize; i++)
     {
       string day = i.ToString("00");
       
