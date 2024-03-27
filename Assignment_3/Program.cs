@@ -10,7 +10,7 @@
 //
 
 
-int physicalSize = 32;
+int physicalSize = 31;
 int logicalSize = 0;
 
 
@@ -201,11 +201,13 @@ void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
   string filePath = $"./data/{fileName}";
   if (!File.Exists(filePath))
     throw new Exception($"The file {fileName} does not exist.");
+  Console.WriteLine($"{logicalSize}");
   if (logicalSize == 0)
     throw new Exception($"There are no entries to save. Please add entries!");
-  string[] csvLine = new string[physicalSize];
+  int fileLine = logicalSize + 1;
+  string[] csvLine = new string[fileLine];
   csvLine[0] = ($"Dates,Sales");
-  for (int i = 0; i < logicalSize; i++)
+  for (int i = 0; i <= fileLine; i++)
   {
     
     csvLine[i + 1] = $"{dates[i]},{sales[i].ToString()}";
@@ -376,7 +378,7 @@ void GraphValuesInMemory(string[] dates, double[] sales, int logicalSize)
   string xAxis = "-----";
   string days = "";
 
-  for(int x = 1; x < physicalSize; x++)
+  for(int x = 1; x <= physicalSize; x++)
   {
     string day = x.ToString("00");
     xAxis += "---";
