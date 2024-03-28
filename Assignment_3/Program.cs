@@ -204,13 +204,14 @@ void SaveMemoryValuesToFile(string[] dates, double[] sales, int logicalSize)
   Console.WriteLine($"{logicalSize}");
   if (logicalSize == 0)
     throw new Exception($"There are no entries to save. Please add entries!");
-  int fileLine = logicalSize + 1;
-  string[] csvLine = new string[fileLine];
+  if (logicalSize > 1)
+    Array.Sort(dates, sales, 0, logicalSize);
+  string[] csvLine = new string[logicalSize + 1];
   csvLine[0] = ($"Dates,Sales");
-  for (int i = 0; i <= fileLine; i++)
+  for (int i = 1; i <= logicalSize; i++)
   {
     
-    csvLine[i + 1] = $"{dates[i]},{sales[i].ToString()}";
+    csvLine[i] = $"{dates[i - 1]},{sales[i - 1].ToString()}";
   }
   File.WriteAllLines(filePath, csvLine);
 
